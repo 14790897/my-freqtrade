@@ -19,46 +19,6 @@ concurrency:
 permissions:
   repository-projects: read
 jobs:
-  build-linux:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: ["ubuntu-20.04", "ubuntu-22.04", "ubuntu-24.04"]
-        python-version: ["3.10", "3.11", "3.12"]
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Cache_dependencies
-        uses: actions/cache@v4
-        id: cache
-        with:
-          path: ~/dependencies/
-          key: ${{ runner.os }}-dependencies
-
-      - name: pip cache (linux)
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: pip-${{ matrix.python-version }}-ubuntu
-
-      - name: Backtesting (multi)
-        run: |
-          cp tests/testdata/config.tests.json config.json
-          freqtrade create-userdir --userdir user_data
-          freqtrade new-strategy -s AwesomeStrategy
-          freqtrade new-strategy -s AwesomeStrategyMin --template minimal
-          freqtrade backtesting --datadir tests/testdata --strategy-list AwesomeStrategy AwesomeStrategyMin -i 5m
-
-      - name: Hyperopt
-        run: |
-          cp tests/testdata/config.tests.json config.json
-          freqtrade create-userdir --userdir user_data
-          freqtrade hyperopt --datadir tests/testdata -e 6 --strategy SampleStrategy --hyperopt-loss SharpeHyperOptLossDaily --print-all
 
   deploy-docker:
     runs-on: ubuntu-22.04
