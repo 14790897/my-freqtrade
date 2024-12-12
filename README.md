@@ -7,6 +7,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/5737e6d668200b7518ff/maintainability)](https://codeclimate.com/github/freqtrade/freqtrade/maintainability)
 
 支持cross margin 单次交易的freqtrade
+Support cross margin for single trades in Freqtrade
 
+use:
+docker pull 14790897/freqtrade_cache:develop
 
-- 
