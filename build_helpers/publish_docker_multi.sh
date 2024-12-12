@@ -2,8 +2,8 @@
 
 # The below assumes a correctly setup docker buildx environment
 
-IMAGE_NAME=freqtradeorg/freqtrade
-CACHE_IMAGE=freqtradeorg/freqtrade_cache
+IMAGE_NAME=14790897/freqtrade
+CACHE_IMAGE=14790897/freqtrade_cache
 # Replace / with _ to create a valid tag
 TAG=$(echo "${BRANCH_NAME}" | sed -e "s/\//_/g")
 TAG_PLOT=${TAG}_plot
